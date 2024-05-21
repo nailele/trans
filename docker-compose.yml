@@ -1,17 +1,17 @@
-version: "3.9"
+version: '3.9'
+
 services:
-  web:
+  app:
     build: .
     ports:
       - "8000:8000"
     depends_on:
-      - db
-  db:
-    image: mongo
-    ports:
-      - "27017:27017"
-    volumes:
-      - mongo-data:/data/db
+      - redis
+    environment:
+      REDIS_HOST: redis
+      REDIS_PORT: 6379
 
-volumes:
-  mongo-data:
+  redis:
+    image: "redis:alpine"
+    ports:
+      - "6379:6379"

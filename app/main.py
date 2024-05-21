@@ -1,24 +1,15 @@
 from fastapi import FastAPI, HTTPException
-from pydantic import BaseModel
 
 from app.services import delete_word, get_all_words, get_word_details
 
 app = FastAPI()
 
 
-class WordResponse(BaseModel):
-    word: str
-#     definitions: list
-#     synonyms: list
-#     translations: list
-#     examples: list
-
-
 @app.get("/word/{word}")
-async def read_word(word: str):
-    details = await get_word_details(word)
+async def read_word(word: str, source: str = 'auto', dest: str = "en"):
+    details = await get_word_details(word, source, dest)
     if details is None:
-        raise HTTPException(status_code=404, detail="Word not found")
+        raise HTTPException(detail="Word not found", status_code=404)
     return details
 
 
