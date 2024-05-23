@@ -165,6 +165,3 @@ poetry run pytest
 
 Thank you for the opportunity to work on this project. I look forward to any feedback or further discussion regarding the project.
 
----
-
-Feel free to adjust any parts of this README as needed!
